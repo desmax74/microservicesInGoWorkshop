@@ -1,0 +1,20 @@
+package: org.desmax/gdgsardegna
+import:
+- package: github.com/buaazp/fasthttprouter
+  version: f93d231177d48a59ac65b92ea46dcc6edb6a79c0
+- package: github.com/klauspost/compress
+  version: 9d711f4445beb7f6488148ce04e3b4dc6e72242d
+  subpackages:
+  - flate
+  - gzip
+  - zlib
+- package: github.com/klauspost/cpuid
+  version: ~1.0.0
+- package: github.com/klauspost/crc32
+  version: ~1.0.0
+- package: github.com/valyala/fasthttp
+  version: cb7c08f920e1fc8a89ec1003b855f74c6aa6c427
+- package: github.com/boltdb/bolt
+  version: ~1.3.0
+  subpackages:
+  - '...'

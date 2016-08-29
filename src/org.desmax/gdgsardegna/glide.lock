@@ -1,0 +1,22 @@
+hash: 79d9d1c2c281238399e98051b2c5df279dfea7d2fa158818e3b54d81bc0a0703
+updated: 2016-08-29T22:34:30.504213105+02:00
+imports:
+- name: github.com/boltdb/bolt
+  version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
+  subpackages:
+  - '...'
+- name: github.com/buaazp/fasthttprouter
+  version: f93d231177d48a59ac65b92ea46dcc6edb6a79c0
+- name: github.com/klauspost/compress
+  version: 9d711f4445beb7f6488148ce04e3b4dc6e72242d
+  subpackages:
+  - flate
+  - gzip
+  - zlib
+- name: github.com/klauspost/cpuid
+  version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
+- name: github.com/klauspost/crc32
+  version: 19b0b332c9e4516a6370a0456e6182c3b5036720
+- name: github.com/valyala/fasthttp
+  version: cb7c08f920e1fc8a89ec1003b855f74c6aa6c427
+testImports: []
