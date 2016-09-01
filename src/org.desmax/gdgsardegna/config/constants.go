@@ -14,11 +14,11 @@ const (
 	CONFIG      = "config"
 	PORT        = "PORT"
 	APPNAME     = "APPNAME"
-	ADDRESS     = "ADDRESS"
 	DEVELOPMENT = "DEVELOPMENT"
 	CERTFILE    = "CERTFILE"
 	KEYFILE     = "KEYFILE"
 	LOGPATH     = "LOGPATH"
 	LOGGER      = "LOGGER"
 	LOGSERVER   = "LOGSERVER"
+	DB          = "DB"
 )

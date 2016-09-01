@@ -29,4 +29,17 @@ install dependencies with
 glide install
 
 ####ENV VARS
-KEYFILE=<path>/GDGWorshop/key.pem;PORT=8081;DEVELOPMENT=true;ADDRESS=127.0.0.1;APPNAME=gdg;CERTFILE=<path>/GDGWorshop/cert.pem;LOGPATH=<path>/gdg.log;LOGSERVER=localhost:1902
+KEYFILE=<path>/GDGWorshop/key.pem;PORT=8081;DEVELOPMENT=true;ADDRESS=127.0.0.1;APPNAME=gdg;CERTFILE=<path>/GDGWorshop/cert.pem;LOGPATH=<path>/gdg.log;LOGSERVER=
+
+KEYFILE=/dati_nix/go_workspaces/GDGWorkshop/key.pem
+PORT=8081
+DEVELOPMENT=true
+ADDRESS=127.0.0.1
+APPNAME=gdg
+CERTFILE=/dati_nix/go_workspaces/GDGWorkshop/cert.pem
+LOGSERVER=localhost:1902
+LOGPATH=/dati_nix/go_workspaces/GDGWorkshop/log.txt
+
+
+#### Build
+go build -tags netgo -a -v

@@ -26,10 +26,15 @@ type Configuration struct {
 func GetConfiguration() Configuration {
 
 	development := true
-	address := os.Getenv(ADDRESS)
 	serverPort := os.Getenv(PORT)
+	if(serverPort == "") {serverPort = "8080"}
+
 	appName := os.Getenv(APPNAME)
+	if(appName == "") {appName = "GDG"}
+
 	dev := os.Getenv(DEVELOPMENT)
+	if(dev == "") {dev = "true"}
+
 	certFile := os.Getenv(CERTFILE)
 	keyFile := os.Getenv(KEYFILE)
 	logPath := os.Getenv(LOGPATH)
@@ -38,7 +43,6 @@ func GetConfiguration() Configuration {
 
 	conf := Configuration{
 		Development: development,
-		Address:     address,
 		ServerPort:  serverPort,
 		AppName:     appName,
 		Certfile:    certFile,
@@ -47,9 +51,9 @@ func GetConfiguration() Configuration {
 		LogServer:   logServer,
 	}
 
-	if conf.Development {
+	//if conf.Development {
 		fmt.Println("Conf:", conf)
-	}
+	//}
 	return conf
 }
 
@@ -58,5 +62,5 @@ func HttpServer(router *fasthttprouter.Router, conf Configuration) {
 }
 
 func HttpsServer(router *fasthttprouter.Router, conf Configuration) {
-	log.Fatal(fasthttp.ListenAndServeTLS(conf.Address+":"+conf.ServerPort, conf.Certfile, conf.KeyFile, router.Handler))
+	log.Fatal(fasthttp.ListenAndServeTLS(conf.ServerPort, conf.Certfile, conf.KeyFile, router.Handler))
 }

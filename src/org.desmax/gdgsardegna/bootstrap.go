@@ -5,17 +5,51 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"github.com/buaazp/fasthttprouter"
+	"org.desmax/gdgsardegna/config"
+	"org.desmax/gdgsardegna/handlers"
+	mid "org.desmax/gdgsardegna/middlewares"
+	"org.desmax/gdgsardegna/sys"
 )
 
-var conf config.Configuration
+var Conf config.Configuration
 
 func init() {
-	log.Println("Ready to rumble")
+	fmt.Println("Ready to rumble")
+	Conf = config.GetConfiguration()
 	fmt.Println(config.Banner)
-	conf = config.GetConfiguration()
 }
 
 func main() {
-	fmt.Println("The best is yet to come")
+
+	//Log to server (on linux nc -lk 1902)
+	// logServer := sys.StartLogServer(Conf)
+	//logger := sys.StartLogger(Conf, logServer)
+	//defer logServer.Close()
+
+	//Log to file
+	//logger, logFile := sys.StartLoggerFS(Conf)
+	//defer logFile.Close()
+
+	//LOG to stdout
+	logger := sys.StartLoggerStdOut(Conf, "INFO:")
+
+	db := sys.StartDB(Conf, logger)// NOTE: embedded only for development, when deployed as a container use an external database
+	defer db.Close()
+
+	//goroutine to print stats
+	//go sys.MonitorRuntime(logger, Conf)
+
+	/*Routes*/
+	router := fasthttprouter.New()
+	router.GET("/", mid.DBMidw(mid.LogMidw(mid.ConfigMidw(handlers.List, Conf), logger), db))  //Middleware chain, decorator pattern
+	router.GET("/:id", mid.DBMidw(mid.LogMidw(mid.ConfigMidw(handlers.Read, Conf), logger), db))
+	router.POST("/", mid.DBMidw(mid.LogMidw(mid.ConfigMidw(handlers.SaveOrUpdateMsg, Conf), logger), db))
+	router.PUT("/", mid.DBMidw(mid.LogMidw(mid.ConfigMidw(handlers.SaveOrUpdateMsg, Conf), logger), db))
+
+	/*Server*/
+	config.HttpServer(router, Conf) //HTTP
+	//config.HttpsServer(router, conf) //HTTPS
+
+
 }
